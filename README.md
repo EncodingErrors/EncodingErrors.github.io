@@ -6,13 +6,15 @@
 
 ### 傻瓜式项目
 
-[基于Flask的简单网站](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E5%82%BB%E7%93%9C%E5%BC%8F%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%9F%BA%E4%BA%8EFlask%E7%9A%84%E7%AE%80%E5%8D%95%E7%BD%91%E7%AB%99.md)
+[基于Flask的简单网站](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E5%82%BB%E7%93%9C%E5%BC%8F%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%9F%BA%E4%BA%8EFlask%E7%9A%84%E7%AE%80%E5%8D%95%E7%BD%91%E7%AB%99.md)：第一次尝试写网站
+
+[视频制作速成（误）](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E5%82%BB%E7%93%9C%E5%BC%8F%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%A7%86%E9%A2%91%E5%88%B6%E4%BD%9C%E9%80%9F%E6%88%90%EF%BC%88%E8%AF%AF%EF%BC%89.md)：第一次做视频
 
 ### 有趣的事
 
-[大佬的图](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%8B%EF%BC%9A%E5%A4%A7%E4%BD%AC%E7%9A%84%E5%9B%BE.md)
+[大佬的图](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%8B%EF%BC%9A%E5%A4%A7%E4%BD%AC%E7%9A%84%E5%9B%BE.md)：为了精神食粮我甚至可以去学习……
 
-[制作词云](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%8B%EF%BC%9A%E5%88%B6%E4%BD%9C%E8%AF%8D%E4%BA%91.md)
+[制作词云](https://github.com/EncodingErrors/Try-to-write-something/blob/master/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%8B%EF%BC%9A%E5%88%B6%E4%BD%9C%E8%AF%8D%E4%BA%91.md)：第一次接单
 
 ### 作业
 
