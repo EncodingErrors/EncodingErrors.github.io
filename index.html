@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./static/style.css">
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="./static/simulationData.js"></script>
+        <title>生鲜电商模型—首页</title>
+    </head>
+    <body>
+        <main id="app">
+            <div id="index-page" v-if="page_tag['index']['tag'] == true">
+                <div>
+                    <button>定位</button>
+                    <input id="test" type="text" value="搜索框">
+                    <button>扫码</button>
+                    <button>留言</button>
+                </div>
+                <ul>
+                    <li v-for="(value, key) in index_page.classification_ul">
+                        <img src="" alt="">
+                        <span>{{ key }}</span>
+                    </li>
+                </ul>
+                <div>
+                    <div>
+                        <div>
+                            <span>超划算</span>
+                            <button>更多></button>
+                        </div>
+                        <ul>
+                            <li v-for="(value, key) in index_page.promotion_ul['超划算']">
+                                <img src="" alt="">
+                                <span>{{ value["商品参数"]["商品名称"] }}</span><br>
+                                <span>{{ value["价格"]["现价"] }}</span>
+                                <span>元/箱</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div>
+                            <span>吃好点</span>
+                            <span>{{ index_page.promotion_ul.advertisement_1 }}</span>
+                            <ul>
+                                <li v-for="(value, key) in index_page.promotion_ul['吃好点']">
+                                    <img src="" alt="">
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <span>产地量贩</span>
+                            <span>{{ index_page.promotion_ul.advertisement_1 }}</span>
+                            <ul>
+                                <li v-for="(value, key) in index_page.promotion_ul['产地量贩']">
+                                    <img src="" alt="">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>    
+                </div>
+                <div>
+                    <div>
+                        <button  v-for="(value, key) in index_page.recommend_ul":id="getStr(key)" @click="changeRecommend">
+                            <span>{{ value["name"] }}</span><br>
+                            <span>{{ value["tips_text"] }}</span>
+                        </button>
+                    </div>
+                    <ul v-for="(value, key) in index_page.recommend_ul" v-if="value['tag']==true">
+                        <li v-for="merchandise in value['recommend_data']">
+                            <img src="" alt="">
+                            <div>
+                                <span>{{ merchandise["商品参数"]["商品名称"] }}</span>
+                                <div>
+                                    <div>
+                                        <span v-for="(color, tags) in merchandise['推荐标签']":style="getStr('color:'+color)">{{ tags }}</span><br>
+                                        <span>{{ merchandise["价格"]["现价"] }}</span>
+                                        <span style="color: red;">元/箱</span>
+                                    </div>
+                                    <button>
+                                        <img src="" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="classification-page" v-if="page_tag['classification']['tag'] == true">classification</div>
+            <div id="shopping-page" v-if="page_tag['shopping']['tag'] == true">shopping</div>
+            <div id="mine-page" v-if="page_tag['mine']['tag'] == true">mine</div>
+            <div>
+                <button v-for="(val, key) in page_tag":id="getStr(key)" @click="changeMainPage">
+                    <img src="" alt="">
+                    <span>{{ val["tips_text"] }}</span>
+                </button>
+            </div>
+        </main>
+    </body>
+    <script>
+        var main_page = new Vue({
+            el:"#app",
+            //主要数据（部分数据应当在后端获取，例如各个商品的信息等，此处直接写入vue中）
+            data:{
+                //page_tag存储底部主要按钮信息
+                page_tag:{
+                    "index": {
+                        "tag": true,
+                        "img_src": "",
+                        "tips_text": "主页"
+                    },
+                    "classification": {
+                        "tag": false,
+                        "img_src": "",
+                        "tips_text": "分类"
+                    },
+                    "shopping": {
+                        "tag": false,
+                        "img_src": "",
+                        "tips_text": "购物车"
+                    },
+                    "mine": {
+                        "tag": false,
+                        "img_src": "",
+                        "tips_text": "我的"
+                    }
+                },
+                //index_page存储主页信息
+                index_page:{
+                    //主页上的分类列表
+                    classification_ul:{
+                        "水果蔬菜": "",
+                        "肉蛋禽品": "",
+                        "海鲜水产": "",
+                        "速食冷冻": "", 
+                        "粮油食品": ""
+                    },
+                    //主页上的促销列表
+                    promotion_ul:{
+                        "超划算":{
+                            "merchandise_1":commodityData["commodity_1"],
+                            "merchandise_2":commodityData["commodity_2"],
+                            "merchandise_3":commodityData["commodity_3"],
+                        },
+                        "吃好点" :{
+                            "merchandise_1":commodityData["commodity_4"],
+                            "merchandise_2":commodityData["commodity_5"],
+                        },
+                        "产地量贩":{
+                            "merchandise_1":commodityData["commodity_6"],
+                            "merchandise_2":commodityData["commodity_1"],
+                        },
+                        "advertisement_1":"美国大樱桃尝鲜",
+                        "advertisement_2":"凤梨19.9元/箱"
+                    },
+                    //主页上的推荐列表
+                    recommend_ul:{
+                        "all":{
+                            "tag":true,
+                            "name":"全部",
+                            "tips_text":"猜你喜欢",
+                            "recommend_data":{
+                                "merchandise_1":commodityData["commodity_1"],
+                                "merchandise_2":commodityData["commodity_2"],
+                                "merchandise_3":commodityData["commodity_3"],
+                                "merchandise_4":commodityData["commodity_4"]
+                            }
+                        },
+                        "season":{
+                            "tag":false,
+                            "name":"季节",
+                            "tips_text":"当季优选",
+                            "recommend_data":{
+                                "merchandise_1":commodityData["commodity_6"],
+                                "merchandise_2":commodityData["commodity_1"],
+                                "merchandise_3":commodityData["commodity_2"],
+                                "merchandise_4":commodityData["commodity_3"]
+                            }
+                        },
+                        "import":{
+                            "tag":false,
+                            "name":"进口",
+                            "tips_text":"国际直采",
+                            "recommend_data":{
+                                "merchandise_1":commodityData["commodity_5"],
+                                "merchandise_2":commodityData["commodity_6"],
+                                "merchandise_3":commodityData["commodity_1"],
+                                "merchandise_4":commodityData["commodity_2"]
+                            }
+                        },
+                        "popularity":{
+                            "tag":false,
+                            "name":"人气",
+                            "tips_text":"大家在买",
+                            "recommend_data":{
+                                "merchandise_1":commodityData["commodity_4"],
+                                "merchandise_2":commodityData["commodity_5"],
+                                "merchandise_3":commodityData["commodity_6"],
+                                "merchandise_4":commodityData["commodity_1"]
+                            }
+                        }
+                    }
+                }
+            },
+            methods:{
+                getStr(itemStr){
+                    return itemStr;
+                },
+                changeMainPage(event){
+                    // 该方法实现页面切换；
+                    var thisEvent = event.currentTarget;
+                    for(let key in this.page_tag){
+                        this.page_tag[key]["tag"] = false;
+                    this.page_tag[$(thisEvent).attr("id")]["tag"] = true;
+                    };
+                },
+                changeRecommend(event){
+                    var thisEvent = event.currentTarget;
+                    for(let key in this.index_page.recommend_ul){
+                        this.index_page.recommend_ul[key]["tag"] = false;
+                    this.index_page.recommend_ul[$(thisEvent).attr("id")]["tag"] = true;
+                    };
+                }
+            }
+        });
+    </script>
+    <script src="./static/mainPage.js"></script>
+</html>
